@@ -1,0 +1,1 @@
+-keep class com.swucollector.app.data.api.model.** { *; }

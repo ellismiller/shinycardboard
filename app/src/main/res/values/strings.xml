@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shiny Cardboard</string>
+    <string name="tab_collection">Collection</string>
+    <string name="tab_playsets">Playsets</string>
+    <string name="tab_sets">Sets</string>
+    <string name="tab_decks">Decks</string>
+</resources>
