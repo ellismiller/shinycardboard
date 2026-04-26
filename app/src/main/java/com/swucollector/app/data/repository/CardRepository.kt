@@ -30,7 +30,7 @@ class CardRepository @Inject constructor(
     }
 
     private suspend fun syncSet(setCode: String) {
-        val cards = api.getCardsBySet(setCode)
+        val cards = api.getCardsBySet(setCode).data
         val identities = mutableListOf<CardIdentityEntity>()
         val printings = mutableListOf<PrintingEntity>()
 
