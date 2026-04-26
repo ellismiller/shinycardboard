@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         if (isSyncing) {
                             LinearProgressIndicator(Modifier.fillMaxWidth())
                         }
-                        AppNavigation()
+                        AppNavigation(onSync = syncViewModel::triggerSync)
                     }
 
                     SnackbarHost(hostState = snackbarHostState)

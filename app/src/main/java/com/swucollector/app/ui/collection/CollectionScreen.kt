@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
@@ -38,7 +39,8 @@ import com.swucollector.app.data.db.model.PrintingWithCollection
 
 @Composable
 fun CollectionScreen(
-    viewModel: CollectionViewModel = hiltViewModel()
+    viewModel: CollectionViewModel = hiltViewModel(),
+    onSync: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -49,7 +51,7 @@ fun CollectionScreen(
             onSelect = viewModel::selectSet
         )
         if (state.printingsBySet.isEmpty()) {
-            EmptyState()
+            EmptyState(onSync = onSync)
         } else {
             PrintingList(
                 printingsBySet = state.printingsBySet,
@@ -211,7 +213,7 @@ private fun QtyRow(label: String, value: Int, onValueChange: (Int) -> Unit) {
 }
 
 @Composable
-private fun EmptyState() {
+private fun EmptyState(onSync: () -> Unit = {}) {
     Column(
         modifier = Modifier.fillMaxSize().padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -220,10 +222,14 @@ private fun EmptyState() {
         Text("No cards yet", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         Text(
-            "Tap the sync button to fetch card data",
+            "Fetch card data to get started",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+        Spacer(Modifier.height(16.dp))
+        Button(onClick = onSync) {
+            Text("Sync Cards")
+        }
     }
 }

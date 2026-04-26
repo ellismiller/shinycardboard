@@ -44,7 +44,7 @@ private val bottomNavScreens = listOf(
 )
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(onSync: () -> Unit = {}) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -82,7 +82,7 @@ fun AppNavigation() {
             startDestination = Screen.Collection.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Collection.route) { CollectionScreen() }
+            composable(Screen.Collection.route) { CollectionScreen(onSync = onSync) }
             composable(Screen.Playsets.route) { PlaysetScreen() }
             composable(Screen.Sets.route) { SetCompletionScreen() }
             composable(Screen.Decks.route) {
